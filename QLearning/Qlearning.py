@@ -4,44 +4,7 @@ import numpy as np
 import random
 from tqdm import tqdm
 import argparse
-
-def Draw_a_card(is_first_card = False):
-    num = int(random.randint(1, 10))
-    if is_first_card:
-        return num # 第一张牌为黑牌
-    elif random.random() < 1/3:
-        return -num # 1/3 概率红牌
-    return num  # 2/3 概率黑牌
-
-def is_bust(num):
-    return num < 1 or num > 21
-
-# state : (dealer_first_card_number, sum of player's cards)
-# action : 0 --- hit ; 1 --- stick
-# return 
-#   (next_state, reward, is_terminal)
-def Step(state, action):
-    dealer_card, summ = state
-    # hit
-    if action == 0:
-        summ += Draw_a_card()
-        if is_bust(summ):
-            return ((dealer_card, summ), -1, True)
-        else:
-            return ((dealer_card, summ), 0, False)
-    # stick
-    if action == 1:
-        summ2 = dealer_card
-        while summ2 < 16:
-            summ2 += Draw_a_card()
-            if is_bust(summ2):
-                return ((dealer_card, summ), 1, True)
-        if summ2 < summ:
-            return ((dealer_card, summ), 1, True)
-        if summ2 == summ:
-            return ((dealer_card, summ), 0, True)
-        if summ2 > summ:
-            return ((dealer_card, summ), -1, True)
+from easy21_env import *
 
 global Q, N, parser
 
@@ -144,10 +107,10 @@ def test():
     win = 0
     loss = 0
     tie = 0
-    for i in range(10000):
+    for i in range(100000):
         state = (Draw_a_card(is_first_card=True), Draw_a_card(is_first_card=True))
         while True:
-            action = E_greedy(state, eps=args.eps, No=args.no)
+            action = E_greedy(state, eps=args.eps, No=0)
             next_state, reward, is_terminal = Step(state, action)
             if is_terminal:
                 if reward > 0:

@@ -4,7 +4,7 @@ import random
 import numpy as np
 import pickle
 from tqdm import tqdm
-import easy21
+from easy21_env import *
 
 global state_space
 state_space = [(i, j) for i in range(1, 11) for j in range(1, 22)]
@@ -84,16 +84,16 @@ def Policy_test():
     pi_pth = "./Pi.dict"
     V = load_pickle(v_pth)
     Pi = load_pickle(pi_pth)
-    print(V)
-    print(Pi)
+    #print(V)
+    #print(Pi)
     win = 0
     loss = 0
     tie = 0
-    for i in range(10000):
-        state = (easy21.Draw_a_card(is_first_card=True), easy21.Draw_a_card(is_first_card=True))
+    for i in range(100000):
+        state = (Draw_a_card(is_first_card=True), Draw_a_card(is_first_card=True))
         while True:
             action = Pi[state]
-            next_state, reward, is_terminal = easy21.Step(state, action)
+            next_state, reward, is_terminal = Step(state, action)
             if is_terminal:
                 if reward > 0:
                     win += 1
