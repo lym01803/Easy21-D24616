@@ -89,7 +89,7 @@ def Policy_test():
     win = 0
     loss = 0
     tie = 0
-    for i in range(100000):
+    for i in range(10000000):
         state = (Draw_a_card(is_first_card=True), Draw_a_card(is_first_card=True))
         while True:
             action = Pi[state]
@@ -106,5 +106,5 @@ def Policy_test():
     print(win, loss, tie)
 
 if __name__ == "__main__":
-    #Policy_train()
+    Policy_train()
     Policy_test()

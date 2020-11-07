@@ -107,10 +107,10 @@ def test():
     win = 0
     loss = 0
     tie = 0
-    for i in range(100000):
+    for i in range(args.test_sample):
         state = (Draw_a_card(is_first_card=True), Draw_a_card(is_first_card=True))
         while True:
-            action = E_greedy(state, eps=args.eps, No=0)
+            action = E_greedy(state, eps=args.eps, No=args.no)
             next_state, reward, is_terminal = Step(state, action)
             if is_terminal:
                 if reward > 0:
@@ -150,6 +150,7 @@ if __name__ == "__main__":
     global parser
     parser = argparse.ArgumentParser()
     parser.add_argument("--test", action="store_true")
+    parser.add_argument("--test_sample", type=int, default=1000000)
     parser.add_argument("--eps", type=float, default=0.0)
     parser.add_argument("--no", type=float, default=0.0)
     parser.add_argument("--alpha", type=float)
