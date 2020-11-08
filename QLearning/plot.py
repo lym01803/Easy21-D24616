@@ -36,9 +36,9 @@ fig = plt.figure()
 plt.xlabel("Dealer's Points")
 plt.ylabel("Your Points")
 # 绘制3D max Q(s,a) 图
-'''
+
 ax = mplot3d.Axes3D(fig)
-ax.set_zlabel("Your Win Rate")
+ax.set_zlabel("Your Expected Reward")
 #surf0 = ax.plot_surface(X, Y, Z0, cmap = plt.get_cmap("Blues"))
 #surf1 = ax.plot_surface(X, Y, Z1, cmap = plt.get_cmap("Reds"))
 surf = ax.plot_surface(X, Y, Z, cmap="rainbow")
@@ -46,4 +46,5 @@ surf = ax.plot_surface(X, Y, Z, cmap="rainbow")
 # 绘制2D A(s,a) 图
 cmap = sns.cubehelix_palette(start = 2.5, rot = 1, gamma=0.7, as_cmap = True)
 sns.heatmap(A, cmap=cmap)
+'''
 plt.show()
