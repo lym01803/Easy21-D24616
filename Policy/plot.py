@@ -28,11 +28,11 @@ plt.xlabel("Dealer's Points")
 plt.ylabel("Your Points")
 #surf0 = ax.plot_surface(X, Y, Z0, cmap = plt.get_cmap("Blues"))
 #surf1 = ax.plot_surface(X, Y, Z1, cmap = plt.get_cmap("Reds"))
-'''
 ax = mplot3d.Axes3D(fig)
-ax.set_zlabel("Your Win Rate")
+ax.set_zlabel("Your Expected Reward")
 surf = ax.plot_surface(X, Y, Z, cmap="rainbow")
 '''
 cmap = sns.cubehelix_palette(start = 2.5, rot = 1, gamma=0.7, as_cmap = True)
 sns.heatmap(A, cmap=cmap)
+'''
 plt.show()

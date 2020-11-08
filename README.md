@@ -121,3 +121,51 @@ Here is [our code](https://github.com/lym01803/Easy21-D24616/tree/master/Policy)
 The policy iteration has a very clear training process and almost no hyper-parameter.
 
 In our experiment, the policy iteration method becomes to be convergent in only 5 iteration.
+
+| Iteration | Unstable |
+| --------- | -------- |
+| 1         | 104      |
+| 2         | 46       |
+| 3         | 7        |
+| 4         | 1        |
+| 5         | 0        |
+
+#### Graph of $V(s)$
+
+<img src="./Report_graph/V_s.svg"/>
+
+Quite similar to the one of Q-learning, but a little more smooth.
+
+#### Win Rate
+
+Test with 10M episodes, win in 4787639 episodes, lose in 5002949 episodes and tie in 209412 episodes.
+
+Win rate: $47.9\%$
+
+## Comparison
+**Action policy**
+
+<img src="./Report_graph/policy-qlearning-action.png"/>
+
+$x-axis$: Dealer's points.
+
+$y-axis$: Your current points.
+
+$0$ : Hit.
+
+$1$ : Stick.  
+
+Obviously, the graph got from Policy Iteration is more regular. My intuition tells me that the more regular solution got from Policy iteration is better than the one got from Q-learning. And the win rate of Policy Iteration is a little higher than that of Q-learning.
+
+**Training time**
+
+The Policy Iteration becomes convergent after only 5 iterations. In every iteration, it traverses all the state space and action space twice (once in updating $\pi$ and once in evaluating $V$). In this Easy-21 problem, the Policy Iteration performs well and train the model in a very short time.
+
+The Q-learning method converge slowly so we should set a max iteration times for it. In our experiment, we train the Q-learning model on 2.5M or 10M episodes, which takes a much longer time than training with Policy Iteration method.
+
+**Some properties**
+
+Training with Policy Iteration method, we need to know the transition probability distribution $P(s'|s,a)$, while Q-learning method does not require this imformation. In Easy-21 we get the distribution easily by simulation, but if we are training for another more complex problem, it may be difficult or even impossible to get the distribution. So Q-learning has advantages in this aspect.
+
+Policy Iteration need to traverse all the state space and action space. So if the state space and action space are large, it may be expensive to train with Policy Iteration. Q-learning does not need to traverse all the state space and action space. It mainly focus on the local space which the optimal solution are likely located in. 
+
